@@ -3,6 +3,8 @@ path = require('path'),
 bodyParser = require('body-parser'),
 cons = require('consolidate'),
 dust = require('dustjs-helpers'),
+var connect = require('connect');
+var serveStatic = require('serve-static');
 pg = require('pg'),
 app = express();
 var pool = new pg.Pool({
@@ -42,6 +44,6 @@ client.query('SELECT * FROM public.loradata', function(err, result){
 });
 
 // Server
-app.listen(3000, function(){
-console.log('Server Started On Port 3000');
+connect().use(serveStatic(__dirname)).listen(2500, function(){
+    console.log('Server running on 2500');
 });
